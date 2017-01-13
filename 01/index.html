@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS + CSS Clock</title>
+</head>
+<body>
+
+
+    <div class="clock">
+      <h1>
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+      </h1>
+      <div class="clock-face">
+
+        <div class="hand hour-hand"></div>
+        <div class="hand min-hand"></div>
+        <div class="hand second-hand"></div>
+      </div>
+    </div>
+
+
+  <style>
+    html {
+      font-family:'helvetica neue';
+      text-align: center;
+      font-size: 10px;
+    }
+
+    body {
+      font-size: 2rem;
+      display:flex;
+      flex:1;
+      min-height: 100vh;
+      align-items: center;
+    }
+
+    h1 {
+      margin:0;
+      padding:0;
+    }
+    h1 span {
+      font: 26px Monaco, MonoSpace;
+      height: 50%;
+      left:calc(50% - 10px);
+      position: absolute;
+      text-align: center;
+      width: 20px;
+      top: 0;
+      transform-origin: bottom center;
+    }
+    h1 span:first-child {
+      transform: rotate(30deg);
+    }
+    h1 span:nth-child(2) {
+      transform: rotate(60deg);
+    }
+    h1 span:nth-child(3) {
+      transform: rotate(90deg);
+    }
+    h1 span:nth-child(4) {
+      transform: rotate(120deg);
+    }
+    h1 span:nth-child(5) {
+      transform: rotate(150deg);
+    }
+    h1 span:nth-child(6) {
+      transform: rotate(180deg);
+    }
+    h1 span:nth-child(7) {
+      transform: rotate(210deg);
+    }
+    h1 span:nth-child(8) {
+      transform: rotate(240deg);
+    }
+    h1 span:nth-child(9) {
+      transform: rotate(270deg);
+    }
+    h1 span:nth-child(10) {
+      transform: rotate(300deg);
+    }
+    h1 span:nth-child(11) {
+      transform: rotate(330deg);
+    }
+    .clock {
+      width: 30rem;
+      height: 30rem;
+      border:20px solid white;
+      border-radius:50%;
+      margin:50px auto;
+      position: relative;
+      padding:2rem;
+      box-shadow:
+        0 0 0 4px rgba(0,0,0,0.1),
+        inset 0 0 0 3px #EFEFEF,
+        inset 0 0 10px black,
+        0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .clock-face {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform: translateY(-3px); /* account for the height of the clock hands */
+    }
+
+    .hand {
+      width:50%;
+      height:6px;
+      background:black;
+      position: absolute;
+      top:50%;
+      transform-origin: 100%;/*x axis*/
+      transition:all 0.2s
+    }
+    .hour-hand {
+      width:40%;
+      left:10%;
+    }
+    .min-hand {
+
+    }
+    .second-hand {
+      height: 2px;
+    }
+
+  </style>
+
+  <script>
+    const hands = document.querySelectorAll('.hand');
+    const inc = 360/60;
+
+    function setTime(){
+        let d = new Date();
+        const s = d.getSeconds();
+        const m = d.getMinutes();
+        const h = d.getHours();
+        const deg = inc*s+90;
+        hands[2].style.transform=`rotate(${deg}deg)`;
+        hands[1].style.transform=`rotate(${inc*m+90}deg)`;
+        hands[0].style.transform=`rotate(${inc*h+90}deg)`;
+    }
+    setInterval(function(){
+        setTime();
+    }, 1000);
+    setTime();
+
+  </script>
+</body>
+</html>
